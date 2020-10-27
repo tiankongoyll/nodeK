@@ -7,8 +7,8 @@ const querystring = require('querystring')
 
 app.use(static(__dirname + '/'));
 const config = {
-    client_id: '73a4f730f2e8cf7d5fcf',
-    client_secret: '74bde1aec977bd93ac4eb8f7ab63352dbe03ce48'
+    client_id: '575ab44343ca84b55200',
+    client_secret: 'd4d42b6b9db76c9d5370e908fb8c00b73a8cc566'
 }
 
 router.get('/github/login', async (ctx) => {
@@ -30,7 +30,16 @@ router.get('/auth/github/callback', async (ctx) => {
     }
     let res = await axios.post('https://github.com/login/oauth/access_token', params)
     const access_token = querystring.parse(res.data).access_token
-    res = await axios.get('https://api.github.com/user?access_token=' + access_token)
+    console.log('access_token:',access_token);
+    // res = await axios.get('https://api.github.com/user?access_token=' + access_token)
+    res = await axios({
+        method: 'get',
+        url: `https://api.github.com/user`,
+        headers: {
+          accept: 'application/json',
+          Authorization: `token ${access_token}`
+        }
+      });
     console.log('userAccess:', res.data)
     ctx.body = `
         <h1>Hello ${res.data.login}</h1>
