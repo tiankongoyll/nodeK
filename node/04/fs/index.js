@@ -9,7 +9,9 @@ function get(key) {
 function set(key, value) {
   fs.readFile("./db.json", (err, data) => {
     // 可能是空文件，则设置为空对象
+    console.log('data',data);
     const json = data ? JSON.parse(data) : {};
+    console.log('json',json);
     json[key] = value; // 设置值
     // 重新写入文件
     fs.writeFile("./db.json", JSON.stringify(json), err => {

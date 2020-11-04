@@ -2,7 +2,7 @@
     const Sequelize = require("sequelize");
 
     // 建立连接
-    const sequelize = new Sequelize("kaikeba", "root", "example", {
+    const sequelize = new Sequelize("kaikeba", "root", "tiankong", {
         host: "localhost",
         dialect: "mysql",
         operatorsAliases: false
@@ -10,6 +10,11 @@
 
     // 定义模型
     const Fruit = sequelize.define("Fruit", {
+        id:{
+            type:Sequelize.DataTypes.UUID,
+            defaultValue:Sequelize.DataTypes.UUIDV1,
+            primaryKey:true
+        },
         name: {
             type: Sequelize.STRING(20),
             allowNull: false,
@@ -30,43 +35,44 @@
         },
         stock: { type: Sequelize.INTEGER, defaultValue: 0 },
 
-    },
-        {
-            timestamps: false,
-            getterMethods: {
-                amount() {
-                    return this.getDataValue("stock") + "kg";
-                }
-            },
-            setterMethods: {
-                amount(val) {
-                    const idx = val.indexOf('kg');
-                    const v = val.slice(0, idx);
-                    this.setDataValue('stock', v);
-                }
-            }
-        });
+        },
+        // {
+        //     timestamps: false,
+        //     getterMethods: {
+        //         amount() {
+        //             return this.getDataValue("stock") + "kg";
+        //         }
+        //     },
+        //     setterMethods: {
+        //         amount(val) {
+        //             const idx = val.indexOf('kg');
+        //             const v = val.slice(0, idx);
+        //             this.setDataValue('stock', v);
+        //         }
+        //     }
+        // }
+    );
+        // let ret = await Fruit.sync()
+    // Fruit.classify = function (name) {
+    //     const tropicFruits = ['香蕉', '芒果', '椰子']; // 热带水果
+    //     return tropicFruits.includes(name) ? '热带水果' : '其他水果';
+    // };
+    // Fruit.prototype.totalPrice = function (count) {
+    //     return (this.price * count).toFixed(2);
+    // };
 
-    Fruit.classify = function (name) {
-        const tropicFruits = ['香蕉', '芒果', '椰子']; // 热带水果
-        return tropicFruits.includes(name) ? '热带水果' : '其他水果';
-    };
-    Fruit.prototype.totalPrice = function (count) {
-        return (this.price * count).toFixed(2);
-    };
+    // ['香蕉', '草莓'].forEach(f => console.log(f + '是' + Fruit.classify(f)));
 
-    ['香蕉', '草莓'].forEach(f => console.log(f + '是' + Fruit.classify(f)));
-
-    // 同步数据库，force: true则会删除已存在表
-    let ret = await Fruit.sync({ force: false })
+    // // 同步数据库，force: true则会删除已存在表
+    let ret = await Fruit.sync({ force: true })
     // console.log('sync', ret)
     ret = await Fruit.create({
-        name: "香蕉",
-        price: 3.5
+        name: "苹果",
+        price: 4
     })
     // console.log('create', ret)
-    // ret = await Fruit.findAll()
-
+    ret = await Fruit.findAll()
+    console.log(JSON.stringify(ret));
     // 使用实例方法
     // Fruit.findAll().then(fruits => {
     //     const [f1] = fruits;
@@ -98,14 +104,14 @@
     // })
     // console.log('ret:', JSON.stringify(ret))
 
-    const Op = Sequelize.Op;
-    Fruit.findAll({
-        // where: { price: { [Op.lt]:4 }, stock: { [Op.gte]: 100 } }
-        where: { id: { [Op.lt]: 4, [Op.gt]: 2 } }
-    }).then(fruits => {
-        console.log(JSON.stringify(fruits))
-        console.log(fruits.length);
-    });
+    // const Op = Sequelize.Op;
+    // Fruit.findAll({
+    //     // where: { price: { [Op.lt]:4 }, stock: { [Op.gte]: 100 } }
+    //     where: { id: { [Op.lt]: 4, [Op.gt]: 2 } }
+    // }).then(fruits => {
+    //     console.log(JSON.stringify(fruits))
+    //     console.log(fruits.length);
+    // });
 
     // Fruit.destroy({ where: { id: 1 } }).then(r => console.log(r));
 })()

@@ -15,7 +15,8 @@
   console.log('ret:', ret)
   const db = client.db('test')
   const fruits = db.collection('fruits')
-
+  // 删除文档
+  await fruits.deleteMany();
   // 添加文档
   ret = await fruits.insertOne({
     name: '芒果',
