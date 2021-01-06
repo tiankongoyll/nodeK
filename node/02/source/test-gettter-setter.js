@@ -1,5 +1,5 @@
 const kaikeba = {
-    info:{name : '开课吧',desc:'开课吧真不错'},
+    info:{name : 'kkkk',desc:'hghghghg'},
     get name(){
         return this.info.name
     },
