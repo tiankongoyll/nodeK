@@ -8,7 +8,7 @@ class kkb {
 
         loadConfig(this)
 
-        this.$service = initService()
+        this.$service = initService(this)
 
         this.$ctrl = initController(this) // 加载ctrl
 

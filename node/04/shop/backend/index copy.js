@@ -22,13 +22,12 @@ app.use(async (ctx, next) => {
 });
 
 const router = require('koa-router')()
-// 查询商品
 router.get('/admin/products', async (ctx, next) => {
     // const products = await ctx.user.getProducts()
     const products = await Product.findAll()
     ctx.body = { prods: products }
 })
-// 创建商品
+
 router.post('/admin/product', async ctx => {
     const body = ctx.request.body
     const res = await ctx.user.createProduct(body)
@@ -53,7 +52,6 @@ router.get('/cart', async ctx => {
 /**
  * 添加购物车
  */
-
 router.post('/cart', async ctx => {
     const body = ctx.request.body
     console.log('ctx.body', ctx.request.body)
@@ -147,6 +145,7 @@ router.get('/orders', async ctx => {
         })
     ctx.body = { orders }
 })
+
 
 app.use(router.routes())
 

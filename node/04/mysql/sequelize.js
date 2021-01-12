@@ -68,7 +68,7 @@
     // console.log('sync', ret)
     ret = await Fruit.create({
         name: "苹果",
-        price: 4
+        price: 5
     })
     // console.log('create', ret)
     ret = await Fruit.findAll()

@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs')//文件
+const path = require('path')//路径
 const Router = require('koa-router')
 
 // 读取目录
@@ -23,7 +23,7 @@ function initRouter(app) {
     load('routes', (filename, routes) => {
         // index前缀处理
         const prefix = filename === 'index' ? '' : `/${filename}`
-
+        
         // 路由类型判断
         routes = typeof routes === 'function' ? routes(app) : routes
 
@@ -53,10 +53,12 @@ function initController(app) {
 }
 
 
-function initService() {
+function initService(app) {
     const services = {}
     load('service', (filename, service) => {
-        services[filename] = service
+        // services[filename] = service
+        services[filename] = service(app)
+
     })
     return services
 }

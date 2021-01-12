@@ -1,12 +1,13 @@
-const Service = require('egg').Service
+'use strict';
+const Service = require('egg').Service;
 
 class UserService extends Service {
-    async getAll() {
-        // return [
-        //     { name: 'jerry' }
-        // ]
+  async getAll() {
+    // return [
+    //   { name: 'jerry' },
+    // ];
 
-        return await this.ctx.model.User.findAll()
-    }
+    return await this.ctx.model.User.findAll();
+  }
 }
-module.exports = UserService
+module.exports = UserService;
