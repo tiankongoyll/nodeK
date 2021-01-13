@@ -2,6 +2,7 @@
 
 'use strict';
 
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -13,11 +14,10 @@ module.exports = appInfo => {
   const config = exports = {};
 
   // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1561446865227_2139';
+  config.keys = appInfo.name + '_1610454088858_2415';
 
   // add your middleware config here
-  config.middleware = [];
-
+  config.middleware = [ 'errorHandler' ];
   config.swaggerdoc = {
     dirScanner: './app/controller',
     apiInfo: {
@@ -33,7 +33,6 @@ module.exports = appInfo => {
     routerMap: true,
     enable: true,
   };
-
   config.mongoose = {
     url: 'mongodb://127.0.0.1:27017/egg_x',
     options: {
@@ -44,11 +43,10 @@ module.exports = appInfo => {
     },
   };
   config.jwt = {
-    secret: 'Great4-M',
+    secret: 'Great4-M', // 秘钥
     enable: true, // default is false
-    match: /^\/api/, // optional
+    match: /^\/api/, // optional///api/XXXXX打头的接口都会jwt校验
   };
-
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
