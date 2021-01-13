@@ -1,4 +1,4 @@
-import * as glob from 'glob';
+import * as glob from 'glob';//高级深层文件遍历
 import * as Koa from 'koa';
 import * as KoaRouter from 'koa-router';
 import * as  Parameter from 'parameter'
