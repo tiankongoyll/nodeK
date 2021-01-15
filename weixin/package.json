@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-    "sunny": "./bin/sunny clientid 345f94447fcdefc4",
+    "sunny": "./bin/sunny clientid b31ab66c3851c674",
     "ngrok": "./bin/ngrok http 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "co-wechat": "^2.3.0",
+    "co-wechat-api": "^3.11.0",
     "co-wechat-oauth": "^2.0.1",
     "crypto": "^1.0.1",
     "express": "^4.16.4",

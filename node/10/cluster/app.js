@@ -4,7 +4,7 @@ const server = http.createServer((request, response) => {
     response.end('Hello ')
 })
 
-if (!module.parent) {
+if (!module.parent) {//没有父组件，就是主模块就直接启动
     server.listen(3000);
     console.log('app started at port 3000...');
 } else {

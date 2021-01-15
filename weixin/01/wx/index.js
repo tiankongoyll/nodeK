@@ -9,7 +9,7 @@ app.use(static(__dirname + '/'))
 const axios = require('axios')
 const conf = require('./conf')
 
-
+//消息应答
 const wechat = require('co-wechat')
 router.all('/wechat', wechat(conf).middleware(
     async message => {
@@ -35,7 +35,7 @@ router.get('/getTokens', async ctx => {
     });
     ctx.body = res.data
 })
-const WechatAPI = require('co-wechat-api');
+const WechatAPI = require('co-wechat-api');//这个库会自动提供token,并且封装了微信方法
 const { ServerToken} = require('./mongoose')
 const api = new WechatAPI(conf.appid, conf.appsecret,
     async function () {
@@ -46,13 +46,7 @@ const api = new WechatAPI(conf.appid, conf.appsecret,
     }
     
     );
-
-// router.get('/getFollowers', async ctx => {
-//     const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
-//     const res = await axios.get(url)
-//     console.log('getFollowers', res.data)
-//     ctx.body = res.data
-// })
+// const api = new WechatAPI(conf.appid, conf.appsecret)
 // 获取关注者列表
 router.get('/getFollowers', async ctx => {
     var res = await api.getFollowers();
@@ -61,6 +55,12 @@ router.get('/getFollowers', async ctx => {
     console.log('res', res)
     ctx.body = res
 })
+// router.get('/getFollowers', async ctx => {
+//     const url = `https://api.weixin.qq.com/cgi-bin/user/get?access_token=${tokenCache.access_token}`
+//     const res = await axios.get(url)
+//     console.log('getFollowers', res.data)
+//     ctx.body = res.data
+// })
 
 app.use(router.routes()); /*启动路由*/
 app.use(router.allowedMethods());

@@ -1,5 +1,5 @@
 module.exports = {
-    appid: 'wxfc60e88fa8622c69',
-    appsecret: '23c57e17b4073db7d03cca2ebac525ae',
-    token: 'kaikeba',
+    appid: 'wx5ad5ce7aab816841',
+    appsecret: '27480361a7da559582b9551a94fe6cb7',
+    token: 'oyy',
  };
